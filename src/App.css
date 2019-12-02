@@ -20,3 +20,21 @@
 .App-link {
   color: #09d3ac;
 }
+
+#home {
+  background: url("https://images.unsplash.com/photo-1508830524289-0adcbe822b40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2811&q=80") no-repeat center center fixed;
+  display: table;
+  height: 100%;
+  position: absolute;
+  width: 100%;
+  background-size: cover;
+}
+
+.landing-text {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding-bottom: 3%;
+  color: white;
+  text-shadow: 2px 2px 2px #3d3d3d;
+}

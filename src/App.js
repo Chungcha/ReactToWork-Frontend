@@ -51,7 +51,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="App" id="home">
       <Search includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       <ResultsContainer jobs={this.state.jobs}/>
       </div>
