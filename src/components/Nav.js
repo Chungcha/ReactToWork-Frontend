@@ -1,23 +1,36 @@
-
-
 import React from 'react'
+import Login from "./Login"
 
 class Navigation extends React.Component {
 
+  constructor(){
+    super()
+    this.state={
+      showLogin:false
+    }
+  }
+
+  toggleLogin = () => {
+    this.setState({
+      showLogin: !this.state.showLogin
+    })
+  }
 
     render() {
         return <div>
-              <nav class="navbar fixed-top navbar-expand-sm navbar-light bg-light">
+              <nav className="navbar fixed-top navbar-expand-sm navbar-light bg-light">
                  
-    <a href="/" class="navbar-brand">{"<"}ReactToWork{"/>"}</a>
+    <a href="/" className="navbar-brand">{"<"}ReactToWork{"/>"}</a>
 
-    <div class="collapse navbar-collapse">
-      <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-          <a href="/CreateAccount" class="nav-link">Create Account</a>
+    <div className="collapse navbar-collapse">
+      <ul className="navbar-nav ml-auto">
+      <li className="nav-item">
+          <a href="/CreateAccount" className="nav-link">Create Account</a>
         </li>
-        <li class="nav-item">
-          <a href="/login" class="nav-link">Login</a>
+        <li className="nav-item">
+          {/* <a class="nav-link">Login</a> */}
+          <button className="nav-item" onClick={this.toggleLogin}>Login</button>
+          {this.state.showLogin ? <Login handleLogin={this.props.handleLogin}/> : null}
         </li>
 
       </ul>

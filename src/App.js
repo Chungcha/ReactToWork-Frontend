@@ -4,6 +4,7 @@ import './App.css';
 import Search from './components/Search'
 import Navigation from './components/Nav'
 import ResultsContainer from './containers/ResultsContainer'
+import {Router} from "@reach/router"
 
 class App extends React.Component {
   
@@ -11,7 +12,11 @@ class App extends React.Component {
       search: "",
       jobs: [],
       includeRemote:false,
-      searchResults:false
+      searchResults:false,
+      loginInfo: {
+        username: "",
+        password: ""
+      }
   }
 
   setSearch = (e) => {
@@ -52,6 +57,22 @@ class App extends React.Component {
       }
   }
 
+  handleLogin = (e) => {
+    e.preventDefault()
+    let loginObj={
+      username:e.target.username.value,
+      password:e.target.password.value
+    }
+    this.setState({
+      loginInfo: loginObj
+    })
+    this.userLogin()
+  }
+
+  userLogin = () =>{
+    console.log("Work in progress")
+  }
+
   render() {
     return (
       <div className="home-container">
@@ -59,6 +80,9 @@ class App extends React.Component {
       <div className={this.state.searchResults ? "home-background-with-results App container-fluid" : "home-background App container-fluid" } id="home">
       <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       <ResultsContainer jobs={this.state.jobs}/>
+      {/* <Router>
+        
+      </Router> */}
       </div>
       </div>
     );
