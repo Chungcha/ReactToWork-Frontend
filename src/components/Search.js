@@ -5,7 +5,7 @@ class Search extends React.Component {
 
 
     render() {
-        return <div className="landing-text"><h1 className="hero-text display-1 font-weight-bolder">ReactToWork</h1>
+        return <div className="landing-text"><h1 className="hero-text display-1 font-weight-bolder">{"<"}ReactToWork{"/>"}</h1>
             <form onSubmit={this.props.submitSearch}>
             <label htmlFor='search'></label>
             <input type='text' placeholder="Enter a City for Jobs Near You" className='search-input' onChange={this.props.setSearch}></input>

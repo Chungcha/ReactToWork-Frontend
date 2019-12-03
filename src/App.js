@@ -10,7 +10,8 @@ class App extends React.Component {
     state = {
       search: "",
       jobs: [],
-      includeRemote:false
+      includeRemote:false,
+      searchResults:false
   }
 
   setSearch = (e) => {
@@ -42,6 +43,7 @@ class App extends React.Component {
   }
 
   submitSearch = (e) => {
+      this.setState({searchResults:true})
       e.preventDefault()
       if (this.state.includeRemote){
         this.fetchFromIndex()
