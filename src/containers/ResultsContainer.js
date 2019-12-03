@@ -5,10 +5,12 @@ class ResultsContainer extends React.Component {
 
 
     render() {
-        return <div>
+        return <div className="row results-row">
+            <div className="col">
             {this.props.jobs.map(job=>{
                 return <Result job={job}/>
             })}
+        </div>
         </div>
     }
 

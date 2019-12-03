@@ -54,10 +54,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="App" id="home">
+      <div className="home-container">
       <Navigation/>
-      <Search includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
+      <div className={this.state.searchResults ? "home-background-with-results App container-fluid" : "home-background App container-fluid" } id="home">
+      <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       <ResultsContainer jobs={this.state.jobs}/>
+      </div>
       </div>
     );
   }
