@@ -79,9 +79,9 @@ class App extends React.Component {
       <Navigation handleLogin={this.handleLogin}/>
       <Search includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       <ResultsContainer jobs={this.state.jobs}/>
-      <Router>
+      {/* <Router>
         
-      </Router>
+      </Router> */}
       </div>
     );
   }
