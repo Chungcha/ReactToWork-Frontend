@@ -38,3 +38,25 @@
   color: white;
   text-shadow: 2px 2px 2px #3d3d3d;
 }
+
+.navbar {
+  /* font-family: 'Comfortaa', cursive; */
+  font-family: 'Source Code Pro', monospace;
+}
+
+.search-input {
+  width: 22%;
+  margin-bottom:5px;
+  text-align: center;
+  border:none;
+  font-size: 1.1rem;
+}
+
+.hero-text {
+  font-family: 'Source Code Pro', monospace;
+}
+
+.code-icon {
+  font-size: 1.5em;
+  margin-right:5px;
+}

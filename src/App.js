@@ -2,6 +2,7 @@ import React from 'react';
 
 import './App.css';
 import Search from './components/Search'
+import Navigation from './components/Nav'
 import ResultsContainer from './containers/ResultsContainer'
 
 class App extends React.Component {
@@ -52,6 +53,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="App" id="home">
+      <Navigation/>
       <Search includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       <ResultsContainer jobs={this.state.jobs}/>
       </div>
