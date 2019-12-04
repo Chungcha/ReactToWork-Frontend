@@ -49,7 +49,6 @@ class Result extends React.Component {
                         </div>
                     </div>
                 </div>
-                
             </div>
     <div className="card-footer"><strong>Company: </strong>{this.props.job.company ? `${this.props.job.company}` : "Not Listed"} <br></br><strong>Tags: </strong>{Array.isArray(this.props.job.category) ? this.props.job.category.map((tag,i)=>{return <Fragment key={i}><i>{tag} </i>| </Fragment> }) : "None" }</div>
         </div>

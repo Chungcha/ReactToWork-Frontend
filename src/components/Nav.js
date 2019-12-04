@@ -29,9 +29,9 @@ class Navigation extends React.Component {
         </li>
         <li className="nav-item">
           {/* <a class="nav-link">Login</a> */}
-          <button className="nav-item" onClick={this.toggleLogin}>Login</button>
-          {this.state.showLogin ? <Login handleLogin={this.props.handleLogin}/> : null}
+          <a className="nav-link" onClick={this.toggleLogin}>{this.state.showLogin ? "Hide Login" : "Login"}</a>
         </li>
+        {this.state.showLogin ? <Login handleLogin={this.props.handleLogin}/> : null}
 
       </ul>
     </div>

@@ -167,6 +167,9 @@ align-items: center;
 
 }
 
+.nav-link:hover {
+  cursor:pointer;
+}
 
 @media only screen and (min-width: 916px) {
   .button-save {
@@ -174,4 +177,22 @@ align-items: center;
     margin-top:10px;
     margin-bottom:0px;
  }
+}
+
+.login-form {
+  display:inline-flex;
+  margin-top:5px;
+  margin-left:5px;
+}
+
+.login-input {
+  width: 200px;
+  text-align: center;
+  margin-right:3px;
+  font-size: 1.1rem;
+}
+
+.submit-form {
+  border:none;
+  background:none;
 }
