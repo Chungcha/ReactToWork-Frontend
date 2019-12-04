@@ -151,7 +151,8 @@ class App extends React.Component {
   render() {
     return (
       <div className="home-container">
-      <Navigation/>
+      <Navigation handleLogin={this.handleLogin} toggleCreateAccount={this.toggleCreateAccount} currentUserState={this.state.currentUser} logOut={this.logOut}/>
+      <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>
       <div className={this.state.searchResults ? "home-background-with-results App container-fluid" : "home-background App container-fluid" } id="home">
       <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       {this.state.jobs.length>0 && <ResultsContainer jobs={this.state.jobs}/>}
