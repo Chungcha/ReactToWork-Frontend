@@ -25,7 +25,8 @@ class Navigation extends React.Component {
     <div className="collapse navbar-collapse">
       <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-          <a href="/CreateAccount" className="nav-link">Create Account</a>
+          {/* <a href="/CreateAccount" className="nav-link">Create Account</a> */}
+          <button className="nav-link" onClick={()=>this.props.toggleCreateAccount(true)}>Create Account</button>
         </li>
         <li className="nav-item">
           {/* <a class="nav-link">Login</a> */}
