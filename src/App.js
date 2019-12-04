@@ -30,7 +30,7 @@ class App extends React.Component {
         }
       })
       .then(response=>response.json())
-      .then(user=>console.log(user))
+      .then(user=>this.setState({currentUser: user}))
     }
   }
 
