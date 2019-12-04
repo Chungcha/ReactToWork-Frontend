@@ -1,11 +1,9 @@
 import React from 'react';
-
 import './App.css';
 import Search from './components/Search'
 import Navigation from './components/Nav'
 import ResultsContainer from './containers/ResultsContainer'
 import CreateAccount from './components/CreateAccount'
-import {Router} from "@reach/router"
 
 class App extends React.Component {
   
@@ -30,8 +28,14 @@ class App extends React.Component {
         }
       })
       .then(response=>response.json())
-      .then(user=>this.setState({currentUser: user}))
+      .then(user=>this.updateUser(user))
     }
+  }
+
+  updateUser = (obj) => {
+    this.setState({
+      currentUser: obj
+    })
   }
 
   setSearch = (e) => {
@@ -95,9 +99,11 @@ class App extends React.Component {
       })
     }
     fetch('http://localhost:3000/login', objConfig)
-    .then(response=>response)
     .then(response=>response.json())
-    .then(data=>console.log(data))
+    .then(data=>{
+      localStorage.setItem("jwt", data.jwt)
+      this.updateUser(data.user)
+    })
   }
 
   toggleCreateAccount = (boolean) => {
@@ -130,17 +136,22 @@ class App extends React.Component {
         .then(r => r.json())
         .then(data=>{
           localStorage.setItem("jwt", data.jwt)
-          this.setState({currentUser: data.user})
+          this.updateUser(data.user)
         })
           } else {
-            alert("different password")
+            alert("different passwords")
           }
+  }
+
+  logOut = () => {
+    this.updateUser(null)
+    localStorage.removeItem("jwt")
   }
 
   render() {
     return (
       <div className="App" id="home">
-      <Navigation handleLogin={this.handleLogin} toggleCreateAccount={this.toggleCreateAccount}/>
+      <Navigation handleLogin={this.handleLogin} toggleCreateAccount={this.toggleCreateAccount} currentUserState={this.state.currentUser} logOut={this.logOut}/>
       <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>
       <Search includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
       <ResultsContainer jobs={this.state.jobs}/>
