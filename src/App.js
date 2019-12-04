@@ -79,7 +79,7 @@ class App extends React.Component {
       <Navigation/>
       <div className={this.state.searchResults ? "home-background-with-results App container-fluid" : "home-background App container-fluid" } id="home">
       <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
-      <ResultsContainer jobs={this.state.jobs}/>
+      {this.state.jobs.length>0 && <ResultsContainer jobs={this.state.jobs}/>}
       {/* <Router>
         
       </Router> */}

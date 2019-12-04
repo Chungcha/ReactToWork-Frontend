@@ -125,3 +125,53 @@
 margin-top:45%;
 align-items: center;
 }
+
+.button-result {
+  padding-left:5px;
+  padding-right:5px;
+}
+
+.expander {
+  padding-left:50%;
+  font-size:1.8em;
+}
+
+.expander a {
+  margin-left:-100px;
+  font-size:.5em;
+}
+
+.card p {
+  margin-bottom:6px;
+}
+
+.card-footer {
+  padding:8px;
+ 
+}
+
+.card-footer br {
+  content: "";
+  margin: 2em;
+  display: block;
+  font-size: 3px;
+}
+
+.card-body {
+  padding:10px;
+}
+
+
+.button-save {
+  margin:29px;
+
+}
+
+
+@media only screen and (min-width: 916px) {
+  .button-save {
+    margin:29px;
+    margin-top:10px;
+    margin-bottom:0px;
+ }
+}
