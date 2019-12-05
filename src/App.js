@@ -148,13 +148,27 @@ class App extends React.Component {
     localStorage.removeItem("jwt")
   }
 
+  createAPost = () => {
+    let objConfig ={
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/json",
+        "Accept": "Application/json"
+      },
+      body: JSON.stringify({
+        user: {}
+      })
+    }
+    fetch('http://localhost:3000/jobs', objConfig)
+  }
+
   render() {
     return (
       <div className="home-container">
       <Navigation handleLogin={this.handleLogin} toggleCreateAccount={this.toggleCreateAccount} currentUserState={this.state.currentUser} logOut={this.logOut}/>
       <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>
       <div className={this.state.searchResults ? "home-background-with-results App container-fluid" : "home-background App container-fluid" } id="home">
-      <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
+      <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} currentUser={this.state.currentUser} createAPost={this.createAPost}/>
       {this.state.jobs.length>0 && <ResultsContainer jobs={this.state.jobs}/>}
       {/* <Router>
         

@@ -197,3 +197,7 @@ align-items: center;
   border:none;
   background:none;
 }
+
+.addJobButton {
+  margin-left: 10px;
+}

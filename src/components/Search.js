@@ -3,7 +3,6 @@ import React from 'react'
 
 class Search extends React.Component {
 
-
     render() {
         return <div className={this.props.searchResults ? `landing-text-with-results row` : `landing-text row`}>
                 <div className="col"><h1 className="hero-text display-1 font-weight-bolder">{"<"}ReactToWork{"/>"}</h1>
@@ -15,6 +14,7 @@ class Search extends React.Component {
                         <input className="checkbox" type='checkbox' name="RemoteOK" defaultChecked={this.props.includeRemote} onChange={this.props.setFromRemoteOK}></input>
                         <br></br>
                         <input type='submit' className='btn btn-primary' value='Search'></input>
+                        {this.props.currentUser && this.props.currentUser.admin ? <button type='button' className='btn btn-primary addJobButton' onClick={this.props.createAPost}>Create a Post</button> : null }
                     </form>
                 </div>
         </div>
