@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import Moment from 'react-moment'
 import { Markup } from 'interweave';
-import {FaCaretDown, FaCaretUp, FaStackOverflow} from 'react-icons/fa'
+import {FaCaretDown, FaCaretUp, FaStackOverflow, FaTrashAlt} from 'react-icons/fa'
 import {AiOutlineSave} from 'react-icons/ai'
 
 class Result extends React.Component {
@@ -45,7 +45,7 @@ class Result extends React.Component {
                     <div className="col d-flex justify-content-center align-items-center">
                         <div className="">
                             <button onClick={()=>window.open(`${this.props.job.link}`,'_blank')} className="btn btn-info align-middle button-result">{this.state.stackOverFlowJob ? <span>View Job on StackOverflow  <FaStackOverflow/></span>: "View Job On RemoteOK.io"}</button>
-                            <button onClick={()=>this.props.addToSavedJobs(this.props.job)} className="btn btn-success align-middle button-save">Save This Job <AiOutlineSave/></button>
+    <button onClick={()=>this.props.addToSavedJobs(this.props.job,this.props.isSaved)} className={!this.props.isSaved ? `btn btn-success align-middle button-save` : `btn btn-danger align-middle button-save`}>{!this.props.isSaved ? "Save This Job " : "Remove Saved "}{!this.props.isSaved ? <AiOutlineSave/> : <FaTrashAlt/> }</button>
                         </div>
                     </div>
                 </div>

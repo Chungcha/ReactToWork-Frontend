@@ -32,13 +32,14 @@ class App extends React.Component {
       })
       .then(response=>response.json())
       .then(user=>this.updateUser(user))
+
     }
   }
 
   updateUser = (obj) => {
     this.setState({
       currentUser: obj
-    })
+    },()=>this.updateSavedJobs(obj))
   }
 
   setSearch = (e) => {
@@ -152,8 +153,71 @@ class App extends React.Component {
     localStorage.removeItem("jwt")
   }
 
-  addToSavedJobs = (job) => {
-    console.log(job)
+  addToSavedJobs = (job,saved) => {
+    if (!saved) {
+    let data
+
+    if (Array.isArray(job.category)){
+      data = {
+        job: {
+        company: job.company,
+        description: job.description,
+        link: job.link,
+        position:job.position,
+        category:job.category.join(" "),
+        zipCode:this.state.search,
+        date:job.date}
+      }
+    } else {
+      data = {
+        job: {
+        company: job.company,
+        description: job.description,
+        link: job.link,
+        position:job.position,
+        category:job.category,
+        zipCode:this.state.search,
+        date:job.date}
+      }
+    }
+
+    let token = localStorage.jwt
+     let objConfig ={
+      method: "POST",
+      headers: {
+        "Save": true,
+        "Authorization": token,
+        "Content-Type": "Application/json",
+        "Accept": "Application/json"
+      },
+      body: JSON.stringify(data)
+    }
+    fetch('http://localhost:3000/jobs', objConfig)
+    .then(res=>res.json())
+    .then(this.addSavedJobToState)
+    } else {
+      
+
+    }
+  }
+
+  addSavedJobToState = (job) => {
+    if (job.category){
+    job.category = job.category.split(" ")
+    
+    this.setState({usersSavedJobs:this.state.usersSavedJobs.concat(job)})
+    }
+  }
+
+  updateSavedJobs = (userObj) => {
+    if (this.state.currentUser) {
+    let usersSavedJobs = userObj.jobs.map(job=>{
+      if (job.category) {
+      job.category = job.category.split(" ")
+      return job
+    }})
+    this.setState({usersSavedJobs})
+    }
   }
 
   render() {
@@ -166,7 +230,7 @@ class App extends React.Component {
 
       <Router>
 
-      <Home path="/" searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs}/>
+      <Home path="/" usersSavedJobs={this.state.usersSavedJobs} searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs}/>
 
       <Profile path="/profile" user={this.state.currentUser}/>
 

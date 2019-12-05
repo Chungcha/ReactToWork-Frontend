@@ -10,11 +10,16 @@ class ResultsContainer extends React.Component {
         return jobs
     }
 
+    jobBolean = (job) => {
+        let jobCheckArr = this.props.usersSavedJobs.map(job=>{return job.link})
+        return jobCheckArr.includes(job.link)
+    }
+
     render() {
         return <div className="row results-row">
             <div className="col">
             {this.arraySorter(this.props.jobs).map((job)=>{
-                return <Result addToSavedJobs={this.props.addToSavedJobs} key={job.link} job={job}/>
+                return <Result isSaved={this.jobBolean(job)} addToSavedJobs={this.props.addToSavedJobs} key={job.link} job={job}/>
             })}
         </div>
         </div>
