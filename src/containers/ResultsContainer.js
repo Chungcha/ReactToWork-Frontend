@@ -14,7 +14,7 @@ class ResultsContainer extends React.Component {
         return <div className="row results-row">
             <div className="col">
             {this.arraySorter(this.props.jobs).map((job)=>{
-                return <Result key={job.link} job={job}/>
+                return <Result addToSavedJobs={this.props.addToSavedJobs} key={job.link} job={job}/>
             })}
         </div>
         </div>

@@ -1,9 +1,10 @@
 import React from 'react';
 import './App.css';
-import Search from './components/Search'
+import Home from './components/Home'
 import Navigation from './components/Nav'
-import ResultsContainer from './containers/ResultsContainer'
+import Profile from './components/Profile'
 import CreateAccount from './components/CreateAccount'
+import {Router} from '@reach/router'
 
 class App extends React.Component {
   
@@ -17,9 +18,11 @@ class App extends React.Component {
         password: ""
       },
       showCreateAccount: false,
-      currentUser: null
+      currentUser: null,
+      usersSavedJobs:[]
   }
   
+
   componentDidMount(){
     if(localStorage.getItem("jwt")){
       fetch("http://localhost:3000/profile", {
@@ -48,7 +51,7 @@ class App extends React.Component {
   }
 
   setFromRemoteOK = () => {
-      console.log("attempting to include remote")
+      
       this.setState(pre => {return {includeRemote: !pre.includeRemote}})
   }
 
@@ -141,6 +144,7 @@ class App extends React.Component {
           } else {
             alert("different passwords")
           }
+        this.setState({showCreateAccount:false})
   }
 
   logOut = () => {
@@ -148,25 +152,28 @@ class App extends React.Component {
     localStorage.removeItem("jwt")
   }
 
+  addToSavedJobs = (job) => {
+    console.log(job)
+  }
+
   render() {
     return (
+
       <div className="home-container">
       <Navigation handleLogin={this.handleLogin} toggleCreateAccount={this.toggleCreateAccount} currentUserState={this.state.currentUser} logOut={this.logOut}/>
-      <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>
-      <div className={this.state.searchResults ? "home-background-with-results App container-fluid" : "home-background App container-fluid" } id="home">
-      <Search searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
-      {this.state.jobs.length>0 && <ResultsContainer jobs={this.state.jobs}/>}
-      {/* <Router>
-        
-      </Router> */}
-      {/* <div className="App" id="home">
-      <Navigation handleLogin={this.handleLogin} toggleCreateAccount={this.toggleCreateAccount} currentUserState={this.state.currentUser} logOut={this.logOut}/>
-      <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>
-      <Search includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK}/>
-      <ResultsContainer jobs={this.state.jobs}/>
-      </div> */}
+
+      {!this.state.currentUser && <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>}
+
+      <Router>
+
+      <Home path="/" searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs}/>
+
+      <Profile path="/profile" user={this.state.currentUser}/>
+
+      </Router>
       </div>
-      </div>
+
+
     );
   }
 

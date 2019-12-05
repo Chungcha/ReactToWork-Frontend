@@ -183,7 +183,7 @@ align-items: center;
 .login-form {
   display:inline-flex;
   margin-top:5px;
-  margin-left:5px;
+  margin-left:3px;
 }
 
 .login-input {
@@ -196,4 +196,16 @@ align-items: center;
 .submit-form {
   border:none;
   background:none;
+}
+
+.user-welcome {
+  color:black !important;
+}
+
+.sign-up-submit {
+  float:right;
+}
+
+.bio-text {
+  width:500px;
 }

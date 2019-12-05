@@ -45,7 +45,7 @@ class Result extends React.Component {
                     <div className="col d-flex justify-content-center align-items-center">
                         <div className="">
                             <button onClick={()=>window.open(`${this.props.job.link}`,'_blank')} className="btn btn-info align-middle button-result">{this.state.stackOverFlowJob ? <span>View Job on StackOverflow  <FaStackOverflow/></span>: "View Job On RemoteOK.io"}</button>
-                            <button className="btn btn-success align-middle button-save">Save This Job <AiOutlineSave/></button>
+                            <button onClick={()=>this.props.addToSavedJobs(this.props.job)} className="btn btn-success align-middle button-save">Save This Job <AiOutlineSave/></button>
                         </div>
                     </div>
                 </div>

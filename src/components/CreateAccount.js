@@ -1,6 +1,6 @@
 import React from "react"
 import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+
 
 const CreateAccount = (props) => {
     return (
@@ -17,18 +17,36 @@ const CreateAccount = (props) => {
           </Modal.Header>
           <Modal.Body>
             <form onSubmit={(e)=>{props.handleSubmit(e)}}>
-                <label>Username:<input type="text" placeholder="username" name="username"/></label>
-                <label>Email:<input type="email" placeholder="email" name="email"/></label>
-                <label>Zip Code:<input type="number" placeholder="zipCode" name="zipCode"/></label>
-                <label>Bio:<textarea style={{rows:"4", cols:"50"}} name="bio"></textarea></label>
-                <label>Password:<input type="password" placeholder="password" name="password"/></label>
-                <label>Confirm Password:<input type="password" placeholder="password" name="confirmPassword"/></label>
-                <input type="submit"/>
+              <div className="container">
+              <div className="row">
+              <div className="col d-flex justify-content-center">
+                <label>Username:<br></br><input type="text" placeholder="username" name="username"/></label>
+               </div> 
+               <div className="col d-flex justify-content-center">
+                <label>Email:<br></br><input type="email" placeholder="email" name="email"/></label>
+                </div>
+                <div className="col d-flex justify-content-center">
+                <label>Zip Code:<br></br><input type="number" placeholder="zipCode" name="zipCode"/></label>
+                </div>
+              </div>
+              <div className="row d-flex justify-content-center">
+                
+                <label>Bio:<br></br><textarea className="bio-text"  name="bio"></textarea></label>
+                
+              </div>
+              <div className="row">
+              <div className="col d-flex justify-content-center">
+                <label>Password:<br></br><input type="password" placeholder="password" name="password"/></label>
+                </div>
+                <div className="col d-flex justify-content-center">
+                <label>Confirm Password:<br></br><input type="password" placeholder="password" name="confirmPassword"/></label>
+                </div>
+                </div>
+                <hr></hr>
+                <input className="btn btn-primary sign-up-submit" type="submit"/>
+              </div>
             </form>
           </Modal.Body>
-          <Modal.Footer>
-            <Button onClick={props.onHide}>Close</Button>
-          </Modal.Footer>
         </Modal>
       );    
 }
