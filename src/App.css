@@ -218,3 +218,7 @@ align-items: center;
   color: white;
   text-shadow: 2px 2px 2px #3d3d3d;
 }
+
+.addJobButton {
+  margin-left: 10px;
+}

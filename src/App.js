@@ -155,6 +155,20 @@ class App extends React.Component {
   addToSavedJobs = (job) => {
     console.log(job)
   }
+  
+  createAPost = () => {
+    let objConfig ={
+      method: "POST",
+      headers: {
+        "Content-Type": "Application/json",
+        "Accept": "Application/json"
+      },
+      body: JSON.stringify({
+        user: {}
+      })
+    }
+    fetch('http://localhost:3000/jobs', objConfig)
+  }
 
   render() {
     return (
@@ -166,11 +180,14 @@ class App extends React.Component {
 
       <Router>
 
-      <Home path="/" searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs}/>
+      <Home path="/" searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs} currentUser={this.state.currentUser} createAPost={this.createAPost}/>
 
       <Profile path="/profile" user={this.state.currentUser}/>
 
       </Router>
+      
+      
+    
       </div>
 
 
