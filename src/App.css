@@ -209,3 +209,12 @@ align-items: center;
 .bio-text {
   width:500px;
 }
+
+.profile-info {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  padding-bottom: 3%;
+  color: white;
+  text-shadow: 2px 2px 2px #3d3d3d;
+}
