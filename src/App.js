@@ -3,6 +3,7 @@ import './App.css';
 import Home from './components/Home'
 import Navigation from './components/Nav'
 import Profile from './components/Profile'
+import CreatePost from "./components/CreatePost"
 import CreateAccount from './components/CreateAccount'
 import {Router} from '@reach/router'
 
@@ -18,9 +19,18 @@ class App extends React.Component {
         password: ""
       },
       showCreateAccount: false,
+      showCreatePost: false,
       currentUser: null,
       usersSavedJobs:[],
-      usersSaves:[]
+      usersSaves:[],
+      createPostInfo: {
+        company: "",
+        position: "",
+        description: "",
+        link: "",
+        zipcode: "",
+        categories: ""
+      }
   }
   
 
@@ -258,18 +268,31 @@ class App extends React.Component {
     }
   }
   
+  toggleCreatePost = (boolean) => {
+    this.setState({
+      showCreatePost: boolean
+    })
+  }
+
+  updatePostFormState = (event) => {
+    this.setState({
+      createPostInfo: {...this.state.createPostInfo, [event.target.name] : event.target.value}
+    })
+  }
+  
+
   createAPost = () => {
-    let objConfig ={
-      method: "POST",
-      headers: {
-        "Content-Type": "Application/json",
-        "Accept": "Application/json"
-      },
-      body: JSON.stringify({
-        user: {}
-      })
-    }
-    fetch('http://localhost:3000/jobs', objConfig)
+    // let objConfig ={
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "Application/json",
+    //     "Accept": "Application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     user: {}
+    //   })
+    // }
+    // fetch('http://localhost:3000/jobs', objConfig)
   }
 
   render() {
@@ -280,9 +303,11 @@ class App extends React.Component {
 
       {!this.state.currentUser && <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>}
 
+      <CreatePost show={this.state.showCreatePost} onHide={()=>{this.toggleCreatePost(false)}} updatePostFormState={this.updatePostFormState} formState={this.state.createPostInfo}/>
+
       <Router>
 
-      <Home path="/" usersSavedJobs={this.state.usersSavedJobs} searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs} currentUser={this.state.currentUser} createAPost={this.createAPost}/>
+      <Home path="/" usersSavedJobs={this.state.usersSavedJobs} searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs} currentUser={this.state.currentUser} toggleCreatePost={this.toggleCreatePost}/>
     
 
       <Profile path="/profile" user={this.state.currentUser} usersSavedJobs={this.state.usersSavedJobs} jobs={this.state.usersSavedJobs} addToSavedJobs={this.addToSavedJobs}/>

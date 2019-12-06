@@ -15,7 +15,7 @@ class Search extends React.Component {
                         <input className="checkbox" type='checkbox' name="RemoteOK" defaultChecked={this.props.includeRemote} onChange={this.props.setFromRemoteOK}></input>
                         <br></br>
                         <input type='submit' className='btn btn-primary' value='Search'></input>
-                        {this.props.currentUser && this.props.currentUser.admin ? <button type='button' className='btn btn-primary addJobButton' onClick={this.props.createAPost}>Create a Post</button> : null }
+                        {this.props.currentUser && this.props.currentUser.admin ? <button type='button' className='btn btn-primary addJobButton' onClick={()=>this.props.toggleCreatePost(true)}>Create a Post</button> : null }
                     </form>
                 </div>
         </div>
