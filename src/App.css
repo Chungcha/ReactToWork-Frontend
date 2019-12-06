@@ -297,6 +297,11 @@ align-items: center;
   max-height:90%;
 }
 
+.loading {
+  margin-top:-7%;
+  padding-top:0px;
+}
 
-
-
+.loading-done {
+  margin-top:0px;
+}

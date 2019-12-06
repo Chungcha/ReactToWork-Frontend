@@ -7,6 +7,9 @@ import CreatePost from "./components/CreatePost"
 import CreateAccount from './components/CreateAccount'
 import {Router,navigate} from '@reach/router'
 import FourOFour from './components/404'
+import {trackPromise} from 'react-promise-tracker'
+// import Loading from './components/Loading'
+
 
 class App extends React.Component {
   
@@ -69,15 +72,18 @@ class App extends React.Component {
   }
 
   fetchFromIndex = () => {
+    this.setState({jobs:[]})
       let city = this.state.search.split(" ").join("+")
-      fetch(`http://localhost:3000/jobs?search=${city}`)
+    trackPromise(
+      fetch(`http://localhost:3000/jobs?search=${city}`))
       .then(res=>res.json())
       .then(this.addJobsToState)
   }
 
   fetchFromStackOverFlow = () => {
+    this.setState({jobs:[]})
       let city = this.state.search.split(" ").join("+")
-      fetch(`http://localhost:3000/stackoverflowjobs?search=${city}`)
+      trackPromise(fetch(`http://localhost:3000/stackoverflowjobs?search=${city}`))
       .then(res=>res.json())
       .then(this.addJobsToState)
   }
@@ -307,6 +313,7 @@ class App extends React.Component {
   }
 
   render() {
+
     return (
 
       <div className="home-container">
@@ -315,7 +322,7 @@ class App extends React.Component {
       {!this.state.currentUser && <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>}
 
       <CreatePost show={this.state.showCreatePost} onHide={()=>{this.toggleCreatePost(false)}} updatePostFormState={this.updatePostFormState} formState={this.state.createPostInfo} submitAPost={this.submitAPost}/>
-
+      {/* <Loading/> */}
       <Router>
 
       <Home path="/" usersSavedJobs={this.state.usersSavedJobs} searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs} currentUser={this.state.currentUser} toggleCreatePost={this.toggleCreatePost}/>
@@ -326,7 +333,7 @@ class App extends React.Component {
 
       </Router>
       
-      
+    
     
       </div>
 
