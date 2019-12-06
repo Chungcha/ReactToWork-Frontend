@@ -45,6 +45,41 @@
   
 }
 
+.four-o-four-bg {
+ 
+    display: table;
+    /* background: url("./assets/RTW2.jpg") no-repeat center center fixed; */
+    width: 100%;
+    height: 100%;
+    
+}
+
+.fof-text {
+  color:#007bff;
+  text-shadow: none;
+  font-family: "Source Code Pro script=all rev=1";
+  animation:blinkingText 3s infinite;
+}
+
+@keyframes blinkingText{
+  0%{     color:#007bff; }
+  50%{     color:#007bff; }
+  51%{color:transparent; }
+  100%{   color:transparent;   }
+}
+
+.lottie-holder-fof{
+  padding-top:10px;
+}
+
+.lottie-holder-fof:hover{
+  cursor: pointer;
+}
+
+.fof-text:hover{
+  cursor: pointer;
+}
+
 .home-background-with-results {
   background: url("./assets/RTW2.jpg") no-repeat center center fixed;
   width: 100%;
@@ -127,8 +162,8 @@ align-items: center;
 }
 
 .button-result {
-  padding-left:5px;
-  padding-right:5px;
+  padding-left:7px;
+  padding-right:7px;
 }
 
 .expander {
@@ -164,8 +199,16 @@ align-items: center;
 
 
 .button-save {
-  margin:29px;
+  margin:10px;
+  font-size:1.3em;
+  padding: 3px 9px 2px 8px
+  
 
+}
+
+.button-destroy {
+  font-size:1.1em;
+  padding: 5px 10px 5px 10px
 }
 
 .nav-link:hover {
@@ -174,8 +217,8 @@ align-items: center;
 
 @media only screen and (min-width: 916px) {
   .button-save {
-    margin:29px;
-    margin-top:10px;
+    /* margin:29px;
+    margin-top:10px; */
     margin-bottom:0px;
  }
 }
@@ -226,3 +269,34 @@ align-items: center;
 .profile-page {
   margin-top:10%
 }
+
+.profile-div-top {
+  border-top:none;
+}
+
+.profile-row {
+  margin-left:5%;
+  font-size:1.5em
+}
+
+.profile-bio {
+  font-size:1.2em
+}
+
+.job-img {
+  font-size:5em;
+  color:rgba(104, 102, 102, 0.5);
+  padding-left:35px;
+  padding-bottom:10px;
+}
+
+.results-img {
+  flex-shrink:0;
+  -webkit-flex-shrink: 0;
+  max-width:70%;
+  max-height:90%;
+}
+
+
+
+

@@ -5,7 +5,8 @@ import Navigation from './components/Nav'
 import Profile from './components/Profile'
 import CreatePost from "./components/CreatePost"
 import CreateAccount from './components/CreateAccount'
-import {Router} from '@reach/router'
+import {Router,navigate} from '@reach/router'
+import FourOFour from './components/404'
 
 class App extends React.Component {
   
@@ -161,11 +162,14 @@ class App extends React.Component {
 
   logOut = () => {
     this.updateUser(null)
+    this.setState({usersSavedJobs:[],
+      usersSaves:[]})
     localStorage.removeItem("jwt")
+    navigate("/")
   }
 
   addToSavedJobs = (job,saved) => {
-
+  if (this.state.currentUser) {
     if (!saved) {
     let data
 
@@ -225,6 +229,9 @@ class App extends React.Component {
       .then(()=>this.removeFromSaved(job,save))
 
     }
+  }else{
+    alert("You need to log in to do that!")
+  }
   }
 
   removeFromSaved = (job,save) => {
@@ -313,6 +320,7 @@ class App extends React.Component {
 
       <Home path="/" usersSavedJobs={this.state.usersSavedJobs} searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs} currentUser={this.state.currentUser} toggleCreatePost={this.toggleCreatePost}/>
     
+      <FourOFour default />
 
       <Profile path="/profile" user={this.state.currentUser} usersSavedJobs={this.state.usersSavedJobs} jobs={this.state.usersSavedJobs} addToSavedJobs={this.addToSavedJobs}/>
 
