@@ -19,7 +19,8 @@ class App extends React.Component {
       },
       showCreateAccount: false,
       currentUser: null,
-      usersSavedJobs:[]
+      usersSavedJobs:[],
+      usersSaves:[]
   }
   
 
@@ -154,6 +155,7 @@ class App extends React.Component {
   }
 
   addToSavedJobs = (job,saved) => {
+
     if (!saved) {
     let data
 
@@ -197,26 +199,62 @@ class App extends React.Component {
     .then(this.addSavedJobToState)
     } else {
       
+      let newJob = this.state.usersSavedJobs.find(savedJob=>savedJob.link === job.link)
+      let save = this.state.usersSaves.find(save=>save.job_id===newJob.id)
+      
+      fetch(`http://localhost:3000/saves/${save.id}`,{
+        method: "DELETE", 
+        headers: {
+          "Authorization":localStorage.jwt,
+          "Content-Type":"Applicaiton/json",
+          "Accept":"Application/json"
+        }
+        }
+
+      ).then(res=>res.json())
+      .then(()=>this.removeFromSaved(job,save))
 
     }
   }
 
+  removeFromSaved = (job,save) => {
+    let newSaves = [...this.state.usersSavedJobs]
+    let splicer = newSaves.findIndex(savedJob=>savedJob.link===job.link)
+    newSaves.splice(splicer,1)
+    this.setState({usersSavedJobs:newSaves})
+
+    let usersSaves = [...this.state.usersSaves]
+    let index = usersSaves.findIndex(s=>s===save)
+    usersSaves.splice(index,1)
+    this.setState({usersSaves})
+  } 
+
   addSavedJobToState = (job) => {
-    if (job.category){
-    job.category = job.category.split(" ")
+   
     
-    this.setState({usersSavedJobs:this.state.usersSavedJobs.concat(job)})
+    if (job.job.category){
+    job.job.category = job.job.category.split(" ")
+    
+      let usersSaves = [...this.state.usersSaves, job["save"]]
+      
+
+    this.setState({usersSavedJobs:this.state.usersSavedJobs.concat(job.job)})
+    this.setState({usersSaves})
     }
   }
 
   updateSavedJobs = (userObj) => {
+    let usersSaves
     if (this.state.currentUser) {
+      if(userObj.saves) {
+     usersSaves = userObj.saves 
+      }
     let usersSavedJobs = userObj.jobs.map(job=>{
       if (job.category) {
       job.category = job.category.split(" ")
       return job
     }})
-    this.setState({usersSavedJobs})
+    this.setState({usersSavedJobs,usersSaves})
     }
   }
   
@@ -247,7 +285,7 @@ class App extends React.Component {
       <Home path="/" usersSavedJobs={this.state.usersSavedJobs} searchResults={this.state.searchResults} includeRemote={this.state.includeRemote} setSearch={this.setSearch} submitSearch={this.submitSearch} setFromRemoteOK={this.setFromRemoteOK} addToSavedJobs={this.addToSavedJobs} jobs={this.state.jobs} currentUser={this.state.currentUser} createAPost={this.createAPost}/>
     
 
-      <Profile path="/profile" user={this.state.currentUser}/>
+      <Profile path="/profile" user={this.state.currentUser} usersSavedJobs={this.state.usersSavedJobs} jobs={this.state.usersSavedJobs} addToSavedJobs={this.addToSavedJobs}/>
 
       </Router>
       

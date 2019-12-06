@@ -1,5 +1,6 @@
 import React from 'react'
 import Login from "./Login"
+import {Link} from '@reach/router'
 
 class Navigation extends React.Component {
 
@@ -25,7 +26,7 @@ class Navigation extends React.Component {
     <div className="collapse navbar-collapse">
       <ul className="navbar-nav ml-auto">
       <li className="nav-item">
-    {this.props.currentUserState ? <span className="nav-link user-welcome">{"<"}HelloToYou{"/>"} {this.props.currentUserState.username} <p className="nav-link d-inline" onClick={this.props.logOut}>LogOut</p> </span>: <a className="nav-link" onClick={()=>this.props.toggleCreateAccount(true)}>Create Account</a>}
+    {this.props.currentUserState ? <span className="nav-link user-welcome">{"<"}HelloToYou{"/>"} <Link to="/profile">{this.props.currentUserState.username}</Link> <p className="nav-link d-inline" onClick={this.props.logOut}>LogOut</p> </span>: <a className="nav-link" onClick={()=>this.props.toggleCreateAccount(true)}>Create Account</a>}
         </li>
         <li className="nav-item">
           {/* <a class="nav-link">Login</a> */}
