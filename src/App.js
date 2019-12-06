@@ -21,7 +21,15 @@ class App extends React.Component {
       showCreateAccount: false,
       showCreatePost: false,
       currentUser: null,
-      usersSavedJobs:[]
+      usersSavedJobs:[],
+      createPostInfo: {
+        company: "",
+        position: "",
+        description: "",
+        link: "",
+        zipcode: "",
+        categories: ""
+      }
   }
   
 
@@ -228,6 +236,13 @@ class App extends React.Component {
     })
   }
 
+  updatePostFormState = (event) => {
+    this.setState({
+      createPostInfo: {...this.state.createPostInfo, [event.target.name] : event.target.value}
+    })
+  }
+  
+
   createAPost = () => {
     // let objConfig ={
     //   method: "POST",
@@ -250,7 +265,7 @@ class App extends React.Component {
 
       {!this.state.currentUser && <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>}
 
-      <CreatePost show={this.state.showCreatePost} onHide={()=>{this.toggleCreatePost(false)}}/>
+      <CreatePost show={this.state.showCreatePost} onHide={()=>{this.toggleCreatePost(false)}} updatePostFormState={this.updatePostFormState} formState={this.state.createPostInfo}/>
 
       <Router>
 
