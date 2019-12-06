@@ -7,6 +7,7 @@ import CreatePost from "./components/CreatePost"
 import CreateAccount from './components/CreateAccount'
 import {Router,navigate} from '@reach/router'
 import FourOFour from './components/404'
+import Swal from 'sweetalert2'
 
 class App extends React.Component {
   
@@ -288,6 +289,7 @@ class App extends React.Component {
   
 
   submitAPost = (e) => {
+    debugger
     e.preventDefault()
     let objConfig ={
       method: "POST",
@@ -303,8 +305,22 @@ class App extends React.Component {
     }
     fetch('http://localhost:3000/jobs', objConfig)
     .then(response=>response.json())
-    .then(data=>{ 
+    .then(data=>{
+      Swal.fire({
+        title: 'Successful Posting',
+        text: 'Do you want to continue',
+        icon: 'success',
+        confirmButtonText: 'Cool'
+      })
       this.toggleCreatePost(false)
+      this.setState({createPostInfo: {
+        company: "",
+        position: "",
+        description: "",
+        link: "",
+        zipCode: "",
+        categories: ""}})
+        // This can definitely be done better
       this.setState({currentUser: {...this.state.currentUser, ["posts"]: [...this.state.currentUser["posts"], data]}})})
   
   }
