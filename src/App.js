@@ -303,7 +303,9 @@ class App extends React.Component {
     }
     fetch('http://localhost:3000/jobs', objConfig)
     .then(response=>response.json())
-    .then(data=> this.setState({currentUser: {...this.state.currentUser, ["posts"]: [...this.state.currentUser["posts"], data]}}))
+    .then(data=>{ 
+      this.toggleCreatePost(false)
+      this.setState({currentUser: {...this.state.currentUser, ["posts"]: [...this.state.currentUser["posts"], data]}})})
   
   }
 
