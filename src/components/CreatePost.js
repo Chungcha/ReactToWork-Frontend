@@ -28,7 +28,7 @@ const CreatePost = (props) => {
                     </div>
                     <div className="col-md-4 mb-3">
                         <label htmlFor="Zipcode">Zipcode</label>
-                        <input type="integer" className="form-control" id="validationDefault01" placeholder="Zipcode" value={props.formState.zipcode} name="zipcode" onChange={(e)=>props.updatePostFormState(e)} required/>
+                        <input type="integer" className="form-control" id="validationDefault01" placeholder="Zipcode" value={props.formState.zipcode} name="zipCode" onChange={(e)=>props.updatePostFormState(e)} required/>
                     </div>
                 </div>
                 <div className="form-row">

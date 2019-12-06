@@ -29,7 +29,7 @@ class App extends React.Component {
         position: "",
         description: "",
         link: "",
-        zipcode: "",
+        zipCode: "",
         categories: ""
       }
   }
@@ -303,7 +303,8 @@ class App extends React.Component {
     }
     fetch('http://localhost:3000/jobs', objConfig)
     .then(response=>response.json())
-    .then(data=>console.log(data))
+    .then(data=> this.setState({currentUser: {...this.state.currentUser, ["posts"]: [...this.state.currentUser["posts"], data]}}))
+  
   }
 
   render() {
