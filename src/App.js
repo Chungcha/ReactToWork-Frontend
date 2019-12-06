@@ -241,7 +241,6 @@ class App extends React.Component {
 
   addSavedJobToState = (job) => {
    
-    
     if (job.job.category){
     job.job.category = job.job.category.split(" ")
     
@@ -281,18 +280,23 @@ class App extends React.Component {
   }
   
 
-  createAPost = () => {
-    // let objConfig ={
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "Application/json",
-    //     "Accept": "Application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     user: {}
-    //   })
-    // }
-    // fetch('http://localhost:3000/jobs', objConfig)
+  submitAPost = (e) => {
+    e.preventDefault()
+    let objConfig ={
+      method: "POST",
+      headers: {
+        "Save": false,
+        "Authorization": localStorage.jwt,
+        "Content-Type": "Application/json",
+        "Accept": "Application/json"
+      },
+      body: JSON.stringify({
+        job: this.state.createPostInfo
+      })
+    }
+    fetch('http://localhost:3000/jobs', objConfig)
+    .then(response=>response.json())
+    .then(data=>console.log(data))
   }
 
   render() {
@@ -303,7 +307,7 @@ class App extends React.Component {
 
       {!this.state.currentUser && <CreateAccount show={this.state.showCreateAccount} onHide={()=>{this.toggleCreateAccount(false)}} handleSubmit={this.createAccount}/>}
 
-      <CreatePost show={this.state.showCreatePost} onHide={()=>{this.toggleCreatePost(false)}} updatePostFormState={this.updatePostFormState} formState={this.state.createPostInfo}/>
+      <CreatePost show={this.state.showCreatePost} onHide={()=>{this.toggleCreatePost(false)}} updatePostFormState={this.updatePostFormState} formState={this.state.createPostInfo} submitAPost={this.submitAPost}/>
 
       <Router>
 

@@ -16,7 +16,7 @@ const CreatePost = (props) => {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <form onSubmit={()=>{console.log("SUBMIT DIS POST")}}>
+            <form onSubmit={(e)=>props.submitAPost(e)}>
                 <div className="form-row">
                     <div className="col-md-4 mb-3">
                         <label htmlFor="Company">Company</label>
@@ -24,23 +24,23 @@ const CreatePost = (props) => {
                     </div>
                     <div className="col-md-4 mb-3">
                         <label htmlFor="Position">Position</label>
-                        <input type="text" className="form-control" id="validationDefault01" placeholder="Position" value="Position" name= "position" onChange={(e)=>props.updatePostFormState(e)} required/>  
+                        <input type="text" className="form-control" id="validationDefault01" placeholder="Position" value={props.formState.position} name= "position" onChange={(e)=>props.updatePostFormState(e)} required/>  
                     </div>
                     <div className="col-md-4 mb-3">
                         <label htmlFor="Zipcode">Zipcode</label>
-                        <input type="integer" className="form-control" id="validationDefault01" placeholder="Zipcode" value="Zipcode" name="zipcode" onChange={(e)=>props.updatePostFormState(e)} required/>
+                        <input type="integer" className="form-control" id="validationDefault01" placeholder="Zipcode" value={props.formState.zipcode} name="zipcode" onChange={(e)=>props.updatePostFormState(e)} required/>
                     </div>
                 </div>
                 <div className="form-row">
-                    <div class="form-group col-md-8 mb-3">
+                    <div className="form-group col-md-8 mb-3">
                         <label htmlFor="Description">Description</label>
-                        <textarea className="form-control" onChange={(e)=>props.updatePostFormState(e)} id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+                        <textarea className="form-control" onChange={(e)=>props.updatePostFormState(e)} id="exampleFormControlTextarea1" rows="3" name="description" value={props.formState.description}></textarea>
                     </div>
                 </div>
                 <div className="form-row">
                     <div className="form-group col-md-12 mb-3">
                         <label htmlFor="Link">Link</label>
-                        <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="link" onChange={(e)=>props.updatePostFormState(e)} placeholder="Link"/>
+                        <input type="url" className="form-control" id="exampleInputUrl" aria-describedby="urlHelp" name="link" value={props.formState.link} onChange={(e)=>props.updatePostFormState(e)} placeholder="Link"/>
                     </div>
                 </div>
                 <button className="btn btn-primary" type="submit">Submit form</button>
